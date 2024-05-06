@@ -21,18 +21,11 @@ export default function App() {
     setTodos((prevTodos) => [...prevTodos, newTodo]);
   }
 
-  const handleRemoveTodo = (oldTodo) => {
-    setTodos((prevTodos) => prevTodos.filter(function(element) {
-        return element !== oldTodo;
-    }));
-  }
-
   console.log(todos);
   return (
     <div className="App">
           <TodoList todos={todos} setTodos={setTodos} />
           <AddTodo onAddTodo={handleAddTodo} todos={todos} /> 
-          {/* <RemoveTodo onRemoveTodo={handleRemoveTodo} todos={todos} />  */}
     </div>
   );
 }
