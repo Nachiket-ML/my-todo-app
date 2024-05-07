@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import TodoList from './TodoList';
 import AddTodo from './AddTodo';
@@ -21,8 +20,6 @@ export default function App() {
   // const handleAddTodo = (newTodo) => {
   //   setTodos((prevTodos) => [...prevTodos, newTodo]);
   // }
-
-  console.log(todos);
   return (
     <div className="App">
           <TodoList />

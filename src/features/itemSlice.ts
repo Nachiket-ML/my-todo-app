@@ -17,15 +17,27 @@ export const itemSlice = createSlice({
     name: 'item',
     initialState,
     reducers: {
-        click: state => { 
+        click: (state, action: PayloadAction<ItemState>) => {
             //strikethrough if true
-            state.completed = !state.completed
+            console.log(state.completed);
+            state.completed = !state.completed;
+            // const todoItem = state.todoList.find(todo => todo == action);
+            // console.log(todoItem);
+            // todoItem.completed = !todoItem.completed;
+            // if (todoItem != null) {
+            //     console.log(todoItem.completed);
+            //     return todoItem.completed;
+            // }
         }
     }
 })
 
 export const {click} = itemSlice.actions;
 
-export const selectCompleted = (state: RootState) => state.item.completed
+// export const selectCompleted = (state: RootState) => state.todoItem.completed
+// export const click = (item: ItemState) => {
+//     item.completed = !item.completed
+// }
+export const getCompleted = (item: ItemState) => item.completed
 
-export default itemSlice.reducer
+// export default itemSlice.reducer

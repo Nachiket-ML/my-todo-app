@@ -1,10 +1,11 @@
 import React from 'react';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import {click, ItemState, selectCompleted} from './features/itemSlice';
+import {click, ItemState} from './features/itemSlice';
+// import { useAppDispatch, useAppSelector } from './app/hooks';
+import type { AppDispatch, RootState } from './app/store'
 import { useAppDispatch, useAppSelector } from './app/hooks';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+
 
 // This component will represent a single todo item
 
@@ -13,12 +14,12 @@ import { useSelector } from 'react-redux';
 
   
 export default function TodoItem(item: ItemState) {
-    const completed = useAppSelector(selectCompleted);
-
+    // const completed = useAppSelector(selectCompleted);
+    const dispatch = useAppDispatch();
     return (
         <li
-            style={{ textDecoration: completed ? 'line-through' : 'none' }}
-            onClick={() => useAppDispatch(click())}
+            // style={{ textDecoration: completed ? 'line-through' : 'none' }}
+            // onClick={() => dispatch(click())}
         >
             {item.text}
         </li>

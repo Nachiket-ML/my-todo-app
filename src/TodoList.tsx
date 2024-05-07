@@ -1,17 +1,27 @@
 import React, { useState } from 'react';
 
-import {removeCompletedTodos, selectList} from './features/todoListSlice';
+import {removeCompletedTodos, click, selectList} from './features/todoListSlice';
 
-// This component will render the list of todos
 import TodoItem from './TodoItem';
-import { useAppDispatch } from './app/hooks';
-
+import { useAppDispatch, useAppSelector } from './app/hooks';
+import { ItemState, getCompleted } from './features/itemSlice';
+import { useSelector } from 'react-redux';
+// This component will render the list of todos
 // //TODO: Implement clear completed items button to clear strikethroughed items
 export default function TodoList() {
-    //List of strikethroughed items
-    // const [clickedItems, setClickedItems] = useState([]);
-    // const [isStrikeThrough, setIsStrikeThrough] = useState(false); 
-    var todos = selectList;
+    const todos = useAppSelector(selectList);
+    const dispatch = useAppDispatch();
+
+    const completed = (item: ItemState) => {
+        const todoItem = todos.find(todo => todo == item);
+        console.log(todoItem);
+        if (todoItem != null) {
+            console.log(todoItem.completed);
+            return todoItem.completed;
+        }
+        return null;
+    } 
+
     console.log(todos);
 
     //Clears clicked items from TodoList
@@ -19,10 +29,19 @@ export default function TodoList() {
         <>
             <h1>Todo List</h1>
             <ol> 
-                {todos.map((todo) => TodoItem(todo))}
+                {/* {todos.map((todo) => TodoItem(todo))} */}
+                {todos.map((todo) => 
+                <li
+                    style={{ textDecoration: completed(todo) ? 'line-through' : 'none' }}
+                    onClick={() => dispatch(click(todo))}
+                >
+                    {todo.text}
+                </li>)}
             </ol>
             <br></br>
-            <button onClick={() => useAppDispatch(removeCompletedTodos)}>Clear Completed Items</button>
+            <button onClick={() => dispatch(removeCompletedTodos())}>
+                Clear Completed Items
+                </button>
         </>
     );
 }

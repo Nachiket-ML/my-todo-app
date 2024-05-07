@@ -9,7 +9,7 @@ export interface TodoListState {
 
 // Define the initial state using that type
 const initialState: TodoListState = {
-    items: []
+    items: [],
 }
 
 export const todoListSlice = createSlice({
@@ -20,13 +20,25 @@ export const todoListSlice = createSlice({
             state.items.push(action.payload)
         },
         removeCompletedTodos: (state) => {
-            state.items.filter(i => i.completed == false)
+            state.items = state.items.filter((item) => item.completed == false)
+        },
+        click: (state, action: PayloadAction<ItemState>) => {
+            //strikethrough if true
+            // console.log(state.completed);
+            // state.completed = !state.completed;
+            const todoItem = state.items.find(todo => todo.text == action.payload.text);
+            console.log(todoItem);
+            if (todoItem != null) {
+                todoItem.completed = !todoItem.completed;
+                console.log(todoItem.completed);
+                // return todoItem.completed;
+            }
         }
     }
 })
 
-export const { addTodo, removeCompletedTodos } = todoListSlice.actions
+export const { addTodo, click, removeCompletedTodos } = todoListSlice.actions
 
-export const selectList = (state: RootState) => state.list
+export const selectList = (state: RootState) => state.todoList.items
 
 export default todoListSlice.reducer

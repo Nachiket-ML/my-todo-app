@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import todoListReducer from '../features/todoListSlice'
-import itemReducer from '../features/itemSlice'
+// import todoItemReducer from '../features/itemSlice'
 
 export const store = configureStore({
   reducer: {
-    list: todoListReducer,
-    item: itemReducer
+    todoList: todoListReducer,
+    // todoItem: todoItemReducer
   }
 })
 
@@ -13,3 +13,4 @@ export const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch
+export default store;
