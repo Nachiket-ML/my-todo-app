@@ -14,21 +14,38 @@ import React, { useState } from 'react';
 // Pass these methods down to the relevant components as props.
 //TODO: Implement tests in setupTests.js
 //TODO: Add Redux
-export default function App() {
-  const [todos, setTodos] = useState([]);
 
-  const handleAddTodo = (newTodo) => {
-    setTodos((prevTodos) => [...prevTodos, newTodo]);
-  }
+export default function App() {
+  // const [todos, setTodos] = useState([]);
+
+  // const handleAddTodo = (newTodo) => {
+  //   setTodos((prevTodos) => [...prevTodos, newTodo]);
+  // }
 
   console.log(todos);
   return (
     <div className="App">
-          <TodoList todos={todos} setTodos={setTodos} />
-          <AddTodo onAddTodo={handleAddTodo} todos={todos} /> 
+          <TodoList />
+          <AddTodo /> 
     </div>
   );
 }
+
+// export default function App() {
+//   // const [todos, setTodos] = useState([]);
+
+//   // const handleAddTodo = (newTodo) => {
+//   //   setTodos((prevTodos) => [...prevTodos, newTodo]);
+//   // }
+
+//   console.log(todos);
+//   return (
+//     <div className="App">
+//           <TodoList todos={todos} setTodos={setTodos} />
+//           <AddTodo todos={todos} /> 
+//     </div>
+//   );
+// }
 
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
