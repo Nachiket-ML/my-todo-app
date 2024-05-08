@@ -1,7 +1,6 @@
-import { PayloadAction, configureStore, createSlice } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit'
 import todoListReducer from '../features/List/todoListSlice'
 import todoItemReducer from '../features/Item/itemSlice'
-import { ItemState } from '../features/Item/itemSlice'
 
 export const store = configureStore({
   reducer: {

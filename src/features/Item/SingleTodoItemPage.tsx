@@ -1,18 +1,9 @@
-import React from 'react'
-
 import { Link } from 'react-router-dom'
 import { useAppSelector } from '../../app/hooks'
-import { ItemState, selectItem} from './itemSlice';
-import { useParams } from 'react-router-dom';
+import { selectItem} from './itemSlice';
 
 import {getDueDate} from './DueDate';
 
-// interface SingleTodoItemPageProps {
-//     item: ItemState | null;
-//   }
-
-// export const SingleTodoItemPage = (item: ItemState) => {
-// export const SingleTodoItemPage: React.FC<{ match: { params: ItemState } }> = ({ match }) => {
 const SingleTodoItemPage = () => {
     const item = useAppSelector(selectItem);
 
@@ -23,32 +14,22 @@ const SingleTodoItemPage = () => {
             </section>
         )
     }
-    // const itemId = item.id
-
-    // const {itemId} = useParams<ItemState>();
-
-    // const selectedItem = useAppSelector((state) =>
-    //     state.todoList.items.find((i) => i.id === itemId)
-    // )
 
     console.log(item.dueDate);
-    //TODO: Add item description (either via link or on this page directly)
     return (
-        // <section>
+        <section>
           <article className="item">
-            <h2>Item Name: {item.text}</h2>
+            <h2>Item Name: {item.name}</h2>
             <div>
-                {/* {console.log(item.dueDate)} */}
-                <p> The due date for this item is {getDueDate(item.dueDate)}</p>
-
+                <p> Due Date: {getDueDate(item.dueDate)}</p>
+                <h3> Item Description: </h3>
+                <p>{item.description}</p>
             </div>
-            {/* <p className="post-content">{post.content}</p>
-            <ReactionButtons post={post} /> */}
             <Link to={`/todoList/`} className="button">
               Todo List
             </Link>
           </article>
-        // </section>
+        </section>
       )
 }
 export default SingleTodoItemPage;

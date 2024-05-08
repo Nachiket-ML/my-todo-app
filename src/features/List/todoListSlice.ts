@@ -21,13 +21,14 @@ export const todoListSlice = createSlice({
                 console.log(action.payload)
                 state.items.push(action.payload)
             },
-            prepare(text: string, completed=false, dueDate: Date) {
+            prepare(name: string, completed=false, dueDate: Date, description: string) {
                 return {
                     payload: {
                         id: nanoid(),
-                        text,
+                        name,
                         completed,
-                        dueDate
+                        dueDate,
+                        description
                     }
                 }
             }
@@ -37,10 +38,9 @@ export const todoListSlice = createSlice({
         },
         click: (state, action: PayloadAction<ItemState>) => {
             //strikethrough if true
-            const todoItem = state.items.find(todo => todo.text == action.payload.text);
+            const todoItem = state.items.find(todo => todo.name == action.payload.name);
             console.log(todoItem);
             if (todoItem != null ) {
-                // todoItems.forEach(item => item.completed = !item.completed);
                 todoItem.completed = !todoItem.completed;
                 console.log(todoItem.completed);
             }

@@ -1,20 +1,16 @@
-import React, { FormEventHandler, ChangeEventHandler, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import {addTodo, selectList} from '../List/todoListSlice';
-// import {click, ItemState} from './itemSlice';
-import { format, isToday, isThisWeek } from 'date-fns';
-import { nanoid } from 'nanoid'
+import { FormEventHandler, ChangeEventHandler, useState } from 'react';
+import { useAppDispatch } from '../../app/hooks';
+import {addTodo} from '../List/todoListSlice';
 
 // This component will provide a form to add new todos.
 // In the AddTodo component, you can handle the form submission event to add a new todo to the list. 
-// TODO: Remove 'name:' from useState and 'todo:' from setFormState
-
 export default function AddTodo() {
     const currentDate = new Date();
     const [formState, setFormState] = useState({name: '', 
             month: currentDate.getMonth()+1, 
             day: currentDate.getDate(), 
-            year: currentDate.getFullYear()});
+            year: currentDate.getFullYear(),
+            description: ''});
 
     const dispatch = useAppDispatch();
 
@@ -25,54 +21,35 @@ export default function AddTodo() {
 
     const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault();
-        // const dateStr = format();
         const formattedDate = new Date(formState.year, formState.month-1, formState.day);
-        // const newTodo: ItemState = {id: nanoid(), text: formState.name, completed: false, dueDate: formattedDate};
         console.log(formattedDate);
-        dispatch(addTodo(formState.name, false, formattedDate));
+        dispatch(addTodo(formState.name, false, formattedDate, formState.description));
         console.log(formState);
-        // const selector = useAppSelector(selectList);
-        // console.log(useAppSelector(selectList));
-        // console.log(todos)
         setFormState({ name: '', 
             month: currentDate.getMonth()+1, 
             day: currentDate.getDate(), 
-            year: currentDate.getFullYear()});
+            year: currentDate.getFullYear(),
+            description: ''});
     };
 
     return (
         <form onSubmit={handleSubmit}>
-            <label>Add Todos: 
+            <label>
                 <br></br>name:
-                <input type="text" name="name" value={formState.name} onChange={handleChange}></input>
-                <br></br>month:
-                <input type="text" name="month" value={formState.month} onChange={handleChange}></input>
-                <br></br>day:
-                <input type="text" name="day" value={formState.day} onChange={handleChange}></input>
-                <br></br>year:
-                <input type="text" name="year" value={formState.year} onChange={handleChange}></input>
+                <input type="text" name="name" value={formState.name} onChange={handleChange}>
+                </input>month:
+                <input type="number" name="month" value={formState.month} onChange={handleChange}>
+                </input>day:
+                <input type="number" name="day" value={formState.day} onChange={handleChange}>
+                </input>year:
+                <input type="number" name="year" value={formState.year} onChange={handleChange}>
+                </input>
                 <br></br>
-
-                {/* <input type="text" name="todo" value={formState.name}></input> */}
-                {/* <input type="text" name="todo"></input> */}
+                description:
+                <input type="text" name="description" value={formState.description} onChange={handleChange}>
+                </input>
             </label>
             <button type="submit">Add todo</button>
         </form>
     )
 }
-
-
-    // const handleMonthChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-    //     console.log(formState.month);
-    //     setFormState({...formState, [event.target.name]: event.target.value});
-    // };
-
-    // const handleDayChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-    //     console.log(formState.day);
-    //     setFormState({...formState, [event.target.day]: event.target.value});
-    // };
-
-    // const handleYearChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-    //     console.log(formState.year);
-    //     setFormState({...formState, [event.target.name]: event.target.value});
-    // };

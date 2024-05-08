@@ -5,17 +5,19 @@ import { nanoid } from 'nanoid'
 // Define a type for the slice state
 export interface ItemState {
     id: string;
-    text: string;
+    name: string;
     completed: boolean,
-    dueDate: Date;
+    dueDate: Date,
+    description: string;
 }
 
 // Define the initial state using that type
 const initialState: ItemState = {
     id: nanoid(),
-    text: '',
+    name: '',
     completed: false,
-    dueDate: new Date()
+    dueDate: new Date(),
+    description: ''
 }
 
 export const itemSlice = createSlice({
@@ -28,7 +30,8 @@ export const itemSlice = createSlice({
             state.dueDate = action.payload.dueDate;
             state.completed = action.payload.completed;
             state.id = action.payload.id;
-            state.text = action.payload.text;
+            state.name = action.payload.name;
+            state.description = action.payload.description;
         }
     }
 })
@@ -36,9 +39,7 @@ export const itemSlice = createSlice({
 export const {clickViewItem} = itemSlice.actions;
 
 export const selectItem = (state: RootState) => state.todoItem
-// export const click = (item: ItemState) => {
-//     item.completed = !item.completed
-// }
+
 export const getCompleted = (item: ItemState) => item.completed
 
 export default itemSlice.reducer

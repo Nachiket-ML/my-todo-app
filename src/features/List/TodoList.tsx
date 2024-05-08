@@ -1,15 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import {removeCompletedTodos, click, selectList} from './todoListSlice';
 
-import TodoItem from '../Item/TodoItem';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { ItemState, getCompleted, clickViewItem } from '../Item/itemSlice';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 import AddTodo from '../Item/AddTodo';
-
-
 
 
 // This component will render the list of todos
@@ -42,9 +38,7 @@ const TodoList: React.FC = () => {
                         style={{ textDecoration: completed(todo) ? 'line-through' : 'none' }}
                         onClick={() => dispatch(click(todo))}
                     >
-                        {todo.text}
-                        {todo.dueDate?.toDateString()}
-                        
+                        <p>Todo Item: {todo.name} &emsp;&emsp;&emsp; Todo Date: {todo.dueDate?.toDateString()} &emsp;&emsp;&emsp;</p>                        
                     </li>
                     <Link to={`/todoList/${todo.id}`} onClick={() => dispatch(clickViewItem(todo))}>
                         View Item
