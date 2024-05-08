@@ -1,10 +1,10 @@
 import React from 'react';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import {click, ItemState} from './features/itemSlice';
+import {click, ItemState} from './itemSlice';
 // import { useAppDispatch, useAppSelector } from './app/hooks';
-import type { AppDispatch, RootState } from './app/store'
-import { useAppDispatch, useAppSelector } from './app/hooks';
+import type { AppDispatch, RootState } from '../../app/store'
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 
 
 // This component will represent a single todo item

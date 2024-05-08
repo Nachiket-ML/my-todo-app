@@ -1,16 +1,21 @@
-import type { RootState } from '../app/store'
+import type { RootState } from '../../app/store'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { nanoid } from 'nanoid'
 
 // Define a type for the slice state
 export interface ItemState {
+    id: string;
+    text: string;
     completed: boolean,
-    text: string
+    dueDate: Date;
 }
 
 // Define the initial state using that type
 const initialState: ItemState = {
+    id: nanoid(),
+    text: '',
     completed: false,
-    text: ''
+    dueDate: new Date()
 }
 
 export const itemSlice = createSlice({
@@ -20,7 +25,8 @@ export const itemSlice = createSlice({
         click: (state, action: PayloadAction<ItemState>) => {
             //strikethrough if true
             console.log(state.completed);
-            state.completed = !state.completed;
+            state = action.payload;
+            // state.completed = !state.completed;
             // const todoItem = state.todoList.find(todo => todo == action);
             // console.log(todoItem);
             // todoItem.completed = !todoItem.completed;
@@ -34,10 +40,10 @@ export const itemSlice = createSlice({
 
 export const {click} = itemSlice.actions;
 
-// export const selectCompleted = (state: RootState) => state.todoItem.completed
+export const selectItem = (state: RootState) => state.todoItem
 // export const click = (item: ItemState) => {
 //     item.completed = !item.completed
 // }
 export const getCompleted = (item: ItemState) => item.completed
 
-// export default itemSlice.reducer
+export default itemSlice.reducer
