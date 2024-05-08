@@ -18,16 +18,19 @@ export const todoListSlice = createSlice({
     reducers: {
         addTodo: {
             reducer: (state, action: PayloadAction<ItemState>) => {
+                console.log(action.payload)
                 state.items.push(action.payload)
             },
-            prepare: (text: string, dueDate: Date) => ({
-                payload: {
-                    id: nanoid(),
-                    text: text,
-                    completed: false,
-                    dueDate: dueDate
+            prepare(text: string, completed=false, dueDate: Date) {
+                return {
+                    payload: {
+                        id: nanoid(),
+                        text,
+                        completed,
+                        dueDate
+                    }
                 }
-            })
+            }
         },
         removeCompletedTodos: (state) => {
             state.items = state.items.filter((item) => item.completed == false)
@@ -36,7 +39,8 @@ export const todoListSlice = createSlice({
             //strikethrough if true
             const todoItem = state.items.find(todo => todo.text == action.payload.text);
             console.log(todoItem);
-            if (todoItem != null) {
+            if (todoItem != null ) {
+                // todoItems.forEach(item => item.completed = !item.completed);
                 todoItem.completed = !todoItem.completed;
                 console.log(todoItem.completed);
             }

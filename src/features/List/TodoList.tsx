@@ -4,7 +4,7 @@ import {removeCompletedTodos, click, selectList} from './todoListSlice';
 
 import TodoItem from '../Item/TodoItem';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { ItemState, getCompleted } from '../Item/itemSlice';
+import { ItemState, getCompleted, clickViewItem } from '../Item/itemSlice';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 import AddTodo from '../Item/AddTodo';
@@ -46,7 +46,7 @@ const TodoList: React.FC = () => {
                         {todo.dueDate?.toDateString()}
                         
                     </li>
-                    <Link to={`/todoList/${todo.id}`}>
+                    <Link to={`/todoList/${todo.id}`} onClick={() => dispatch(clickViewItem(todo))}>
                         View Item
                     </Link>
                 </>

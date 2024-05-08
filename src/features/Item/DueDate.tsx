@@ -20,12 +20,12 @@ import { parseISO, formatDistanceToNow } from 'date-fns'
 
 // ```tsx
 
-export const DueDate = ({dueDate}: {dueDate: Date}) => {
+export const getDueDate = (dueDate: Date) => {
   let timeTillDue = '';
   if (dueDate) {
     console.log(dueDate);
     const timePeriod = formatDistanceToNow(dueDate);
-    timeTillDue = `In ${timePeriod} days`;
+    timeTillDue = `in ${timePeriod}`;
   }
 
   return (

@@ -2,10 +2,10 @@ import React from 'react'
 
 import { Link } from 'react-router-dom'
 import { useAppSelector } from '../../app/hooks'
-import {click, ItemState, selectItem} from './itemSlice';
+import { ItemState, selectItem} from './itemSlice';
 import { useParams } from 'react-router-dom';
 
-import {DueDate} from './DueDate';
+import {getDueDate} from './DueDate';
 
 // interface SingleTodoItemPageProps {
 //     item: ItemState | null;
@@ -31,15 +31,15 @@ const SingleTodoItemPage = () => {
     //     state.todoList.items.find((i) => i.id === itemId)
     // )
 
-    
+    console.log(item.dueDate);
     //TODO: Add item description (either via link or on this page directly)
     return (
         // <section>
           <article className="item">
             <h2>Item Name: {item.text}</h2>
             <div>
-                {/* <DueDate timestamp={date}> </DueDate> */}
-                <p> The Due date for this item is <DueDate dueDate={item.dueDate}></DueDate></p>
+                {/* {console.log(item.dueDate)} */}
+                <p> The due date for this item is {getDueDate(item.dueDate)}</p>
 
             </div>
             {/* <p className="post-content">{post.content}</p>

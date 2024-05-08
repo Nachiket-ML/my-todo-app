@@ -1,7 +1,7 @@
 import React, { FormEventHandler, ChangeEventHandler, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import {addTodo, selectList} from '../List/todoListSlice';
-import {click, ItemState} from './itemSlice';
+// import {click, ItemState} from './itemSlice';
 import { format, isToday, isThisWeek } from 'date-fns';
 import { nanoid } from 'nanoid'
 
@@ -23,27 +23,13 @@ export default function AddTodo() {
         setFormState({...formState, [event.target.name]: event.target.value});
     };
 
-    // const handleMonthChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-    //     console.log(formState.month);
-    //     setFormState({...formState, [event.target.name]: event.target.value});
-    // };
-
-    // const handleDayChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-    //     console.log(formState.day);
-    //     setFormState({...formState, [event.target.day]: event.target.value});
-    // };
-
-    // const handleYearChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-    //     console.log(formState.year);
-    //     setFormState({...formState, [event.target.name]: event.target.value});
-    // };
-
     const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault();
         // const dateStr = format();
         const formattedDate = new Date(formState.year, formState.month-1, formState.day);
         // const newTodo: ItemState = {id: nanoid(), text: formState.name, completed: false, dueDate: formattedDate};
-        dispatch(addTodo(formState.name, formattedDate));
+        console.log(formattedDate);
+        dispatch(addTodo(formState.name, false, formattedDate));
         console.log(formState);
         // const selector = useAppSelector(selectList);
         // console.log(useAppSelector(selectList));
@@ -74,3 +60,19 @@ export default function AddTodo() {
         </form>
     )
 }
+
+
+    // const handleMonthChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+    //     console.log(formState.month);
+    //     setFormState({...formState, [event.target.name]: event.target.value});
+    // };
+
+    // const handleDayChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+    //     console.log(formState.day);
+    //     setFormState({...formState, [event.target.day]: event.target.value});
+    // };
+
+    // const handleYearChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+    //     console.log(formState.year);
+    //     setFormState({...formState, [event.target.name]: event.target.value});
+    // };
