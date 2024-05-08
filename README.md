@@ -1,3 +1,8 @@
+# TODOs
+1. Add update item link
+2. Throw user error if they input dates which are in the past
+3. Add CSS formatting
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
