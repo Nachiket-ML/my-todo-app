@@ -1,6 +1,8 @@
 import { FormEventHandler, ChangeEventHandler, useState } from 'react';
 import { useAppDispatch } from '../../app/hooks';
-import {addTodo} from '../List/todoListSlice';
+import {addTodo, logAndAddTodo} from '../List/todoListSlice';
+import ItemState from '../Item/itemSlice';
+import store from '../../app/store';
 
 // This component will provide a form to add new todos.
 // In the AddTodo component, you can handle the form submission event to add a new todo to the list. 
@@ -23,7 +25,17 @@ export default function AddTodo() {
         event.preventDefault();
         const formattedDate = new Date(formState.year, formState.month-1, formState.day);
         console.log(formattedDate);
-        dispatch(addTodo(formState.name, false, formattedDate, formState.description));
+        // dispatch(addTodo(formState.name, false, formattedDate, formState.description));
+        const todoItem = {id: '', name: formState.name, completed: false, dueDate: formattedDate, description: formState.description}
+        console.log('Before logAndAddTodo');
+        try {
+            console.log('Before logAndAddTodo');
+            store.dispatch(logAndAddTodo(todoItem));
+            console.log('After logAndAddTodo');
+        } catch (error) {
+            console.error('Error dispatching logAndAddTodo:', error);
+        }
+        console.log('After logAndAddTodo');
         console.log(formState);
         setFormState({ name: '', 
             month: currentDate.getMonth()+1, 

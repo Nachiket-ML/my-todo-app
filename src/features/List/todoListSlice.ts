@@ -1,7 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import type { RootState } from '../../app/store'
+import type { AppDispatch, RootState } from '../../app/store'
 import { ItemState } from '../Item/itemSlice'
 import { nanoid } from '@reduxjs/toolkit'
+import store from '../../app/store';
+// import type { AppDispatch, RootState } from './store'
 import axios from 'axios';
 
 // Define a type for the slice state
@@ -50,16 +52,25 @@ export const todoListSlice = createSlice({
     }
 })
 
+// export const logAndAddTodo = (todo: ItemState) => {
+//     console.log("Start of logAndAddTodo");
+//     return (dispatch: AppDispatch, getState: RootState) => {
+//         const todoListBefore = getState
+//         console.log(`Todo List Before: ${todoListBefore}`)
+//         dispatch(addTodo(todo.name, todo.completed, todo.dueDate, todo.description))
+//         const todoListAfter = getState
+//         console.log(`Todo List After: ${todoListAfter}`)
+//     }
+// }
+
+export const logAndAddTodo = (todo: ItemState) => (dispatch: AppDispatch) => {
+    setTimeout(() => {
+        dispatch(addTodo(todo.name, todo.completed, todo.dueDate, todo.description))
+    }, 5000)
+}
+
 export const { addTodo, click, removeCompletedTodos } = todoListSlice.actions
 
-export const selectList = (state: RootState) => state.todoList.items
-
-export const fetchTodos = createAsyncThunk<ItemState[]>(
-    'todos/fetchTodos',
-    async() => {
-        const response = await axios.get<ItemState[]>('/api/todos');
-        return response.data;
-    }
-)
+export const selectList = (state: RootState) => state.todoList.items 
 
 export default todoListSlice.reducer
